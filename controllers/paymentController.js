@@ -13,8 +13,8 @@ module.exports.addPayment = (req, res) => {
   inputData = {
     ...req.body, id: uuid()
   }
-  if (!req.body.user_id || !req.body.card_name || !req.body.expiration_date || !req.body.cvc || !req.body.payment_date || !req.body.amount )
-  {return req.status(400).send('aaa')}
+  // if (!req.body.user_id || !req.body.card_name || !req.body.expiration_date || !req.body.cvc || !req.body.payment_date || !req.body.amount )
+  // {return req.status(400).send('aaa')}
   knex('payment')
   .insert(inputData)
   .then((data) => {
@@ -22,6 +22,7 @@ module.exports.addPayment = (req, res) => {
   })
   .catch((err)=>{
     res.status(500).send('err')
+    console.log(err)
   })
 };
 

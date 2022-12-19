@@ -14,8 +14,8 @@ module.exports.addUser = (req, res) => {
     ...req.body, id: uuid()
   }
   if (!req.body.name || !req.body.last_name || !req.body.email || !req.body.password || req.body.is_admin)
-  {return res.status(400).send(`aaa`)}
-  knex('users')
+  {return res.status(400).send(`user added`)}
+  knex('user')
   .insert(inputData)
   .then((data)=> {
     res.status(201).json(inputData)
@@ -26,7 +26,7 @@ module.exports.addUser = (req, res) => {
 };
 
 module.exports.getUser = (req, res) => {
-  knex('users')
+  knex('user')
   .where({id : req.params.userid})
   .then((data)=> {
     res.status(200).json(data)
@@ -38,16 +38,16 @@ module.exports.getUser = (req, res) => {
 
 module.exports.updateUser = (req, res) => {
   inputData = {
-    ...req.body, updated_at: knex.fn.now()
+    ...req.body
   }
-  knex('users')
+  knex('user')
   .where({id : req.params.userid})
   .update(inputData)
   .then(() => {
     res.status(200).send(`user #${req.params.userid} was updated`)
   })
   .catch(err => {
-    res.status(500).send(`user #${req.params.userid} could not be updated: ${err}`);
+    res.status(400).send(`user #${req.params.userid} could not be updated: ${err}`);
   })
 
 }

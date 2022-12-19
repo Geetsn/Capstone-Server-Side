@@ -51,7 +51,7 @@ exports.delProduct = (req, res) => {
 
 module.exports.updateProduct = (req, res) => {
   inputData = {
-    ...req.body, updated_at: knex.fn.now()
+    ...req.body
   }
   knex('products')
   .where({id : req.params.productid})

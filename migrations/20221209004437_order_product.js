@@ -2,8 +2,8 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.up = function(knex) {order_product
-  return knex.schema.createTable('', (table)=>{
+exports.up = function(knex) {
+  return knex.schema.createTable('order_product', (table)=>{
     table.uuid('id').primary();
     table
     .uuid('order_id')

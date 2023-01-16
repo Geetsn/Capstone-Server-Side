@@ -10,18 +10,17 @@ module.exports.index = (_req, res) => {
 }
 
 module.exports.addProducts = (req, res) => {
-  inputData = {
-    ...req.body, id: uuid()
-  }
-  if (!req.body.user_id || !req.body.product_name || !req.body.product_image || !req.body.description || !req.body.category || !req.body.color || !req.body.size || !req.body.quantity || !req.body.price)
-  {return req.status(400).send('aaa')}
+  
+  // if ( !req.body.product_name || !req.body.product_image || !req.body.description || !req.body.category || !req.body.color || !req.body.size || !req.body.quantity || !req.body.price)
+  // {return req.status(400).send('aaa')}
   knex('products')
-  .insert(inputData)
+  .insert({ id: uuid(), ...req.body})
   .then((data) => {
-    res.status(201).json(inputData)
+    res.status(201).send({message: 'added products'})
+    console.log(data)
   })
   .catch((err)=>{
-    res.status(500).send('err')
+    res.status(500).send(err)
   })
 };
 
